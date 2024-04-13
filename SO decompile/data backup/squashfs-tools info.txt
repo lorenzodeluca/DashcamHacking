@@ -1,0 +1,36 @@
+https://tldp.org/HOWTO/SquashFS-HOWTO/mksqoverview.html
+
+per estrarre: https://stackoverflow.com/questions/43035699/extracting-from-bin-file
+
+
+COME FARE A ESTRARRE(es file 1.04ww.2022.08.26.bin):
+per avere info sul file binario: # binwalk 1.04ww.2022.08.26.bin
+
+output d'esempio:
+DECIMAL       HEXADECIMAL     DESCRIPTION
+--------------------------------------------------------------------------------
+18227         0x4733          Unix path: /home/matt-ch.huang/ipl/ipl/source/driver/spinand/infinity6b0/halSPINANDCLK.h
+85902         0x14F8E         Unix path: /home/matt-ch.huang/ipl/ipl/source/driver/spinand/infinity6b0/halSPINANDCLK.h
+86240         0x150E0         CRC32 polynomial table, little endian
+87888         0x15750         xz compressed data
+196608        0x30000         uImage header, header size: 64 bytes, header CRC: 0x254C06F3, created: 2022-08-29 09:17:29, image size: 98608 bytes, Data Address: 0x0, Entry Point: 0x0, data CRC: 0x3AB45831, OS: Firmware, CPU: ARM, image type: OS Kernel Image, compression type: lzma, image name: "MVX4##I6B0g26ee13fCM_UBT1501#XVM"
+196672        0x30040         xz compressed data
+327680        0x50000         uImage header, header size: 64 bytes, header CRC: 0xFA5E502F, created: 2022-08-29 09:22:08, image size: 1619244 bytes, Data Address: 0x20008000, Entry Point: 0x20008000, data CRC: 0x6E602A86, OS: Linux, CPU: ARM, image type: OS Kernel Image, compression type: lzma, image name: "MVX4##I6B0g26ee13fKL_LX409##[BR:"
+327744        0x50040         xz compressed data
+1966080       0x1E0000        Squashfs filesystem, little endian, version 4.0, compression:xz, size: 3944348 bytes, 529 inodes, blocksize: 131072 bytes, created: 2022-08-29 09:22:55
+5963776       0x5B0000        Squashfs filesystem, little endian, version 4.0, compression:xz, size: 9260955 bytes, 449 inodes, blocksize: 131072 bytes, created: 2022-08-29 09:22:57
+
+ipotizzando che il fs sia squash guardo direttamente i due squash fs... il primo inizia a 1966080.
+
+per estrarlo dal resto del pacchetto: # dd if=1.04ww.2022.08.26.bin of=rootfs.squashfs bs=1 skip=1966080
+per decomprimere il fs estratto: unsquashfs -d rootfs rootfs.squashfs
+
+IT WORKS!!! 😎
+
+per ricomprimere il fs modificato: # mksquashfs rootfs rootfs_new.squashfs -comp xz
+
+per reimmettere il fs nel firmware originale # dd if=rootfs_new.squashfs of=1.04ww.2022.08.26.bin bs=1 seek=1966080 conv=notrunc
+
+IMPORTANTE; modificare il PackTime nel firmware(.bin) finale con un hexeditor a una data più attuale così da essere sicuri che la dashcam lo esegua
+
+NOTA BENE: in caso di brick non c'è fix
