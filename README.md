@@ -1,4 +1,4 @@
-per rimuovere volume dashcam con toolbox dopo essere connessi a wifi dashcam:
+1) per rimuovere volume dashcam con toolbox dopo essere connessi a wifi dashcam:
 
 versione python 3.12.2
 
@@ -8,3 +8,6 @@ PS C:\Users\Lorenzo\Desktop\70MaiM300Toolbox-main(1)\70MaiM300Toolbox-main> 70ma
 PS C:\Users\Lorenzo\Desktop\70MaiM300Toolbox-main(1)\70MaiM300Toolbox-main> 70mai-m300-toolbox --token=bb222dec6ba5f5900ed2f9d855675209 --set_volume=mute
 
 PS C:\Users\Lorenzo\Desktop\70MaiM300Toolbox-main(1)\70MaiM300Toolbox-main>
+
+
+2) live stream:  rtsp://192.168.0.1:554/livestream/12
