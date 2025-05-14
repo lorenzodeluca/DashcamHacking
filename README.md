@@ -10,4 +10,4 @@ PS C:\Users\Lorenzo\Desktop\70MaiM300Toolbox-main(1)\70MaiM300Toolbox-main> 70ma
 PS C:\Users\Lorenzo\Desktop\70MaiM300Toolbox-main(1)\70MaiM300Toolbox-main>
 
 
-2) live stream:  rtsp://192.168.0.1:554/livestream/12
+2) live stream(to stream on socials like youtube or for using it as a security camera):  rtsp://192.168.0.1:554/livestream/12
